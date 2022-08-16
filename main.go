@@ -49,23 +49,27 @@ func main() {
 	fmt.Println("=====常量=====", a, b, c, red, blue, black, white)
 
 	// 数组
-	var arr [5]int
+	var arr [4]int
 	var strList = [6]string{"0", "1", "2", "3", "4", "5"} // 初始化值
 
 	var lenList = [...]int{
 		1, 2, 3, 4,
 	} // 省略长度自动推算
 
+	lenList2 := [4]int{
+		1, 2, 3, 4,
+	}
+
 	var index = [...]int{
 		13: 2,
 	} // 通过下标赋值
 
-	var arr2 [2][3][4]int
+	// var arr2 [2][3][4]int // 多维数组
 
 	fmt.Println("=====数组=====", arr, strList, lenList)
-	fmt.Println("=====数组=====", arr[0], len(arr))  // 获取数组长度
-	fmt.Println("=====数组=====", index, len(index)) // 获取数组长度
-	fmt.Println("=====数组=====", arr2)              // 多维数组
+	fmt.Println("=====数组=====", arr[0], len(arr))    // 获取数组长度
+	fmt.Println("=====数组=====", index, len(index))   // 获取数组长度
+	fmt.Println("=====数组=====", lenList == lenList2) // 多维数组
 
 	// 切片
 	var spliceArr []int
@@ -80,4 +84,18 @@ func main() {
 	fmt.Println("=====切片=====", spliceArr, len(spliceArr), cap(spliceArr)) // 切片长度和容量
 	spliceArr = append(spliceArr, 1)
 	fmt.Println("=====切片=====", spliceArr, len(spliceArr), cap(spliceArr)) // 切片长度和容量
+
+	// map
+	var m map[string]int
+	var m1 = map[string]int{
+		"哈哈哈": 2,
+	}
+	m2 := map[[4]int]string{
+		lenList: "哈哈哈",
+	}
+	fmt.Println("======map=====", m, m1, m2)
+
+	for key, value := range m2 {
+		fmt.Println(key, value)
+	}
 }
