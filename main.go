@@ -98,4 +98,44 @@ func main() {
 	for key, value := range m2 {
 		fmt.Println(key, value)
 	}
+
+	// 自定义类型
+	type T int
+	type T2 T
+
+	var t T = 1
+	t1 := T2(t)
+	t2 := "hello"
+	// t3 := T2(t2) // cannot convert t2 (variable of type string) to type T2 底层类型不同。T2的底层类型是int
+	fmt.Println("=====自定义类型 type=====", t1, t2)
+
+	// 结构体 struct
+	type Person struct {
+		title string // 如果有重复字段，在嵌入式的情况下会优先访问父结构体的字段
+		name  string
+		age   int
+		sex   string
+	}
+
+	type Book struct {
+		title string
+		page  int
+		index map[string]int
+		Person
+	}
+	book := Book{
+		title: "哈哈哈",
+		page:  1,
+		Person: Person{
+			title: "1",
+			name:  "哈哈哈",
+			age:   2,
+			sex:   "男",
+		},
+	}
+
+	book.index = map[string]int{
+		book.title: book.page,
+	}
+	fmt.Println("====结构体====", book.title, book.Person, book)
 }

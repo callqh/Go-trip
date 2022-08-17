@@ -39,7 +39,7 @@
 - `map`的`key`的类型有所限制，仅限于可以使用`==`和`!=`进行比较的类型。**函数、切片以及`map`本身不能作为`key`值**
 - `map`类型声明后必须赋予初值，后面才可以操作，否则程序会`panic`
 
-相关操作：
+**相关操作：**
 
 - 新增： `map[key]=value`， 若果`key`已经存在，则会覆盖原来的值
 - 获取： `map[key]`
@@ -61,6 +61,42 @@
 		fmt.Println(key, value)
 	}
 ```
+
+#### `struct`
+
+```go
+  type T struct {
+    name string
+    age int
+  }
+```
+
+- 嵌入字段`（Embedded Field）`： 在访问的时候可以直接省略类型名，直接访问嵌入类型的元素`U.name`或者`U.T.name`
+
+```go
+  type T struct {
+    name string
+    age int
+  }
+  type U struct {
+    T // 嵌入类型
+    extra string
+  }
+```
+
+- 结构体类型值初始化：
+  ```go
+  book := Book{
+      title: "哈哈哈",
+      page:  1,
+      Person: Person{
+        title: "1",
+        name:  "哈哈哈",
+        age:   2,
+        sex:   "男",
+      },
+    }
+  ```
 
 ## 变量
 
