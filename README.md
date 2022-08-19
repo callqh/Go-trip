@@ -161,6 +161,7 @@
 ```
 
 - 在 `if`中声明局部变量
+
 ```go
   if a := true; a {
     fmt.Println(a)
@@ -168,6 +169,7 @@
 ```
 
 - 快乐路径(`happy path`)
+
 ```go
 func doSomething() error {
 	if errorCondition1 {
@@ -185,9 +187,66 @@ func doSomething() error {
 ```
 
 > `Go` 社区把这种 `if` 语句的使用方式称为 `if` 语句的“快乐路径`（Happy Path）`”原则，所谓“快乐路径”也就是成功逻辑的代码执行路径，它的特点是这样的：
+>
 > - 仅使用单分支控制结构；当布尔表达式求值为 `false` 时，也就是出现错误时，在单分支中快速返回；
-> - 正常逻辑在代码布局上始终“靠左”，这样读者可以从上到下一眼看到该函数正常逻辑的全貌；（靠左是指正确的逻辑代码不放在if里面）
+> - 正常逻辑在代码布局上始终“靠左”，这样读者可以从上到下一眼看到该函数正常逻辑的全貌；（靠左是指正确的逻辑代码不放在 if 里面）
 > - 函数执行>到最后一行代表一种成功状态。
 
-
 ### 循环
+
+`Go`中仅提供了一种循环那就是`for`。
+
+- 普通 `for` 循环
+  ```go
+    for i:=1; i<10;i++{
+      fmt.Println(i)
+    }
+  ```
+- 始终为 `true` 的循环
+  ```go
+    for {
+      // 循环体
+    }
+  ```
+- `for range`
+  用来对**复合结构**进行遍历（原生的 `string` 类型也可以)
+
+  ```go
+    var s = []int{1, 2, 3, 4}
+
+    for i, value := range s {
+      fmt.Println(i, value)
+    }
+
+
+    h := "这是一个字符串"
+    for i, v := range h {
+      fmt.Println(i, v, string(v))
+      	// 0 36825 这
+        // 3 26159 是
+        // 6 19968 一
+        // 9 20010 个
+        // 12 23383 字
+        // 15 31526 符
+        // 18 20018 串
+    }
+  ```
+
+  - 在遍历字符串时，`v `获取的是 `Unicode` 码值，而不是字符本身。
+  - `i` 为该 `Unicode` 字符码点的内存编码（`UTF-8`）的第一个字节在字符串内存序列中的位置
+
+
+- 中断循环
+  - `continue`：支持带`label`的`continue`
+    ```go 
+      outerLoop:
+        for i := 0; i < 10; i++ {
+          for j := 0; j < 10; j++ {
+            if j == 2 {
+              continue outerLoop // 直接中断内层j循环，跳转到外层i继续遍历
+            }
+            fmt.Println(i, j)
+          }
+        }
+    ```
+  - `break`：同样支持`label`

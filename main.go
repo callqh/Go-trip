@@ -139,4 +139,35 @@ func main() {
 	}
 	fmt.Println("====结构体====", book.title, book.Person, book)
 
+	var s = []int{1, 2, 3, 4}
+
+	for i, value := range s {
+		fmt.Println(i, value)
+	}
+	h := "这是一个字符串"
+	for i, v := range h {
+		fmt.Println(i, v, string(v))
+		// 0 36825 这
+		// 3 26159 是
+		// 6 19968 一
+		// 9 20010 个
+		// 12 23383 字
+		// 15 31526 符
+		// 18 20018 串
+	}
+
+	// for i := 0; i < len(h); i++ {
+	// 	// Go 语言中的字符串值也是一个可空的字节序列，字节序列中的字节个数称为该字符串的长度。一个个的字节只是孤立数据，不表意。
+	// 	fmt.Println(i, h[i])
+	// }
+
+outerLoop:
+	for i := 0; i < 10; i++ {
+		for j := 0; j < 10; j++ {
+			if j == 2 {
+				break outerLoop
+			}
+			fmt.Println("====break=====", i, j)
+		}
+	}
 }
